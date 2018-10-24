@@ -3,23 +3,10 @@
 
 	<groupId>com.freelance</groupId>
 	<artifactId>maven-example</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>maven-example</name>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<scmRepositoryURI>https://mkeysersoze:iiiIII888!@github.com/mkeysersoze/maven-example.git</scmRepositoryURI>
-	</properties>
-
-	<scm>
-		<connection>scm:git:${scmRepositoryURI}</connection>
-		<developerConnection>scm:git:${scmRepositoryURI}</developerConnection>
-		<url>${scmRepositoryURI}</url>
-		<tag>v0.0.5</tag>
-	</scm>
-
 
 	<!-- Using an Internal Repository -->
 	<repositories>
@@ -43,6 +30,16 @@
 		</repository>
 	</distributionManagement>
 
+	<scm>
+		<connection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</developerConnection>
+		<url>scm:git@github.com:mkeysersoze/maven-example.git</url>
+	  <tag>v0.0.1</tag>
+  </scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -82,8 +79,7 @@
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<preparationGoals>clean install</preparationGoals>
-					<!-- <releaseProfiles>releases</releaseProfiles> -->
+					<releaseProfiles>releases</releaseProfiles>
 				</configuration>
 			</plugin>
 		</plugins>
