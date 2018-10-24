@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.freelance</groupId>
+	<artifactId>maven-example</artifactId>
+	<version>0.0.2</version>
+	<packaging>jar</packaging>
+
+	<name>maven-example</name>
+
+	<!-- Using an Internal Repository -->
+	<repositories>
+		<repository>
+			<id>my-internal-site</id>
+			<url>http://192.168.221.132:8081/repository/maven-public/</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<!-- Deploy to a snapshot repository -->
+		<snapshotRepository>
+			<id>internal.repo</id>
+			<name>MyCo Internal Repository</name>
+			<url>http://192.168.221.132:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>internal.repo</id>
+			<name>MyCo Internal Repository</name>
+			<url>http://192.168.221.132:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</developerConnection>
+		<url>scm:git@github.com:mkeysersoze/maven-example.git</url>
+	  <tag>v0.0.2</tag>
+  </scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Créer des assembly : tar.gz, zip, jar, ... -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<releaseProfiles>releases</releaseProfiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>releases</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.5.1</version>
+						<executions>
+							<execution>
+								<id>default-deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<serverId>nexus-releases</serverId>
+							<nexusUrl>http://192.168.221.132:8081/repository/</nexusUrl>
+							<skipStaging>true</skipStaging>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
