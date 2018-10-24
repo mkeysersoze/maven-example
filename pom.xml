@@ -3,7 +3,7 @@
 
 	<groupId>com.freelance</groupId>
 	<artifactId>maven-example</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>maven-example</name>
@@ -31,10 +31,10 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:mkeysersoze/maven-example.git</developerConnection>
-		<url>https://github.com/mkeysersoze/maven-example.git</url>
-	  <tag>v0.0.4</tag>
+		<connection>scm:git:https://github.com/mkeysersoze/maven-example.git</connection>
+		<developerConnection>scm:git:https://github.com/mkeysersoze/maven-example.git</developerConnection>
+		<url>scm:git:https://github.com/mkeysersoze/maven-example.git</url>
+	  <tag>v0.0.5</tag>
   </scm>
 
 	<properties>
